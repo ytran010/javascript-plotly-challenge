@@ -28,10 +28,18 @@
 //     // Answer: It will console log the `button` element.
 //   });})
 d3.json("../data/samples.json").then(function(importedData) {
-    
+    var select = d3.select("#selDataset")
+    // select.append("option")
+    importedData.names.forEach((value, index)=>{
+        console.log(value)
+        select.append("option").text(value).property("value", index)
+    })
+
+    importedData.metadata[0]
     console.log(importedData.names)
 })
-  
+
+.onChange
 
 // d3.json("data/data.json").then((importedData) => {
 //     // console.log(importedData);
