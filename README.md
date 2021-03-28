@@ -1,4 +1,4 @@
-# Plot.ly Challenge - Belly Button Biodiversity
+# Plot.ly challenge - Belly Button Biodiversity
 
 ## Visit https://ytran010.github.io/javascript-plotly-challenge/Plotly/index.html
 
