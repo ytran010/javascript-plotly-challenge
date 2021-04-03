@@ -15,6 +15,7 @@ d3.json("../data/samples.json").then(function(importedData) {
     update(0)
     updateBar(0)
     sorryToBurstYour(0)
+    Gauge1(0)
 })
 
 var sample_index
@@ -29,6 +30,7 @@ function update(value){
 
   sample_values = sample_index.sample_values
   otu_ids = sample_index.otu_ids
+  otu_ids_bar = sample_index.otu_ids.map(d => "OTU " + d)
   otu_labels = sample_index.otu_labels
   // otu_ids = otu_ids.toString();
 
@@ -58,7 +60,7 @@ Object.entries(metavalue).forEach(([key, value])=>{
 function updateBar(sickBars){
 var trace1 = {
   x: data,
-  y: `OTU ${otu_ids}`,
+  y: otu_ids_bar,
   // y: "Content",
   text: otu_labels,
   name: "Bar Graph",
@@ -102,58 +104,40 @@ function sorryToBurstYour(bubble){
   Plotly.newPlot('bubble', bubData, layout);
 }
 
-// function dirtyBellyGauge(gross){
+function Gauge1(){
+  var gauge_data = [
+    {
+      domain: { x: [0, 1], y: [0, 1] },
+      gauge: {
+      axis: { range: [0, 10] },
+            bar: { color: "#fd9c51"},
+            steps: [
+              { range: [0, 1], color: "#f7fcf5" },
+              { range: [1, 2], color: "#e6f5e1" },
+              { range: [2, 3], color: "#cdebc7" },
+              { range: [3, 4], color: "#addea7" },
+              { range: [4, 5], color: "#88cd87" },
+              { range: [5, 6], color: "#5db96b" },
+              { range: [6, 7], color: "#38a055" },
+              { range: [7, 8], color: "#1b843f" },
+              { range: [8, 9], color: "#04672b" },
+              { range: [9, 10], color: "#00441b" }]
+            },
+      value: metavalue.wfreq,
+      title: { text: "Washing Frequency" },
+      type: "indicator",
+      mode: "gauge+number"
+    }
+  ];
   
-//   // part of data to input
-//   var traceGauge = {
-//     type: 'pie',
-//     showlegend: false,
-//     hole: 0.4,
-//     rotation: 90,
-//     values: [ 81/9, 81/9, 81/9, 81/9, 81/9, 81/9, 81/9, 81/9, 81/9, 81],
-//     text: ['0-1','1-2','2-3','3-4','4-5','5-6','6-7','7-8','8-9'],
-//     direction: 'clockwise',
-//     textinfo: 'text',
-//     textposition: 'inside',
-//     marker: {
-//       colors: ['','','','','','','','','','white'],
-//       labels: ['0-1','1-2','2-3','3-4','4-5','5-6','6-7','7-8','8-9'],
-//       hoverinfo: 'label'
-//     }
-//   }
-
-//   // needle
-//   var degrees = 50, radius = .9
-//   var radians = degrees * Math.PI / 180
-//   var x = -1 * radius * Math.cos(radians) * wfreqNum
-//   var y = radius * Math.sin(radians)
-
-//   var gaugeLayout = {
-//     shapes: [{
-//       type: 'line',
-//       x0: 0.5,
-//       y0: 0.5,
-//       x1: 0.6,
-//       y1: 0.6,
-//       line: {
-//         color: 'black',
-//         width: 3
-//       }
-//     }],
-//     title: 'Chart',
-//     xaxis: {visible: false, range: [-1, 1]},
-//     yaxis: {visible: false, range: [-1, 1]}
-//   }
-
-//   var dataGauge = [traceGauge]
-
-//   Plotly.plot('gauge', dataGauge, gaugeLayout)
-// }
-
+  var layout = { width: 600, height: 500, margin: { t: 1, b: 0, l:0 } };
+  Plotly.newPlot('gauge', gauge_data, layout);
+}
 
 
 function optionChanged(value){
   update(value)
   updateBar(value)
   sorryToBurstYour(value)
+  Gauge1(value)
   }
