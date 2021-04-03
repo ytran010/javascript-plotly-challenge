@@ -1,6 +1,6 @@
 # Plot.ly challenge - Belly Button Biodiversity
 
-## Visit 
+## Visit https://ytran010.github.io/javascript-plotly-challenge/Plotly/index.html
 
 
 ![Bacteria by filterforge.com](Images/bacteria.jpg)
